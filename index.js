@@ -25,26 +25,16 @@ keyword.addEventListener("input", (event) => {
 
 
 searchButton.addEventListener("click", async () => {
-  try {
   weatherData = await fetchWeather(); // Wait for the Promise to resolve
   console.log(weatherData); // Log the fetched weather data
-function displayWeather(weatherData) {
-  const weatherContainer = document.querySelector("#weatherresult"); 
-  weatherContainer.innerHTML = ""; // Clear previous weather data
-  const header = document.createElement("h2");
-  header.innerHTML = "Weather Result";
-  weatherContainer.appendChild(header); // Append header to the container
-  const location = document.createElement("h3");
-  location.innerHTML = `${weatherData.location.name}, ${weatherData.location.country}`; // Display location name and country
-  weatherContainer.appendChild(location); // Append location to the container
-  const temp = document.createElement("p");
-  temp.innerHTML = `Temperature: ${weatherData.current.temp_c}°C`; // Display temperature
-  weatherContainer.appendChild(temp); // Append temperature to the container
-} } catch (error) {
-    console.error("Error fetching weather data:", error); // Log any errors
+  function displayWeather(weatherData) {
     const weatherContainer = document.querySelector("#weatherresult"); 
-    weatherContainer.innerHTML = "<p>Error fetching weather data. Please try again.</p>"; // Display error message
-  }
+    weatherContainer.innerHTML = "";
+    weatherContainer.innerHTML = `
+    <h2>Weather Result</h2>
+    <h3>${weatherData.location.name}, ${weatherData.location.country}</h3>
+    <p>Temperature: ${weatherData.current.temp_c}°C</p>`; 
+};
   displayWeather(weatherData);
 });
 
