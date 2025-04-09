@@ -1,40 +1,44 @@
-let keyword = document.querySelector("#city") // Default keyword
 const searchButton = document.querySelector("#search");  
-let weatherData = []; // Global variable to store weather data
+const weatherContainer = document.querySelector("#weatherResult"); 
+let keyword = document.querySelector("#city"); 
+let weatherData = [];
 
 async function fetchWeather() {
   try {
-  const response = await fetch(
-    `https://api.weatherapi.com/v1/forecast.json?key=505b3cf5f180493ba7102053252103&q=${keyword}&days=1&aqi=no&alerts=no`
-  );
-  const data = await response.json();
-  return data;
+    const response = await fetch(
+      `https://api.weatherapi.com/v1/forecast.json?key=505b3cf5f180493ba7102053252103&q=${keyword}&days=1&aqi=no&alerts=no`
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
   } catch (error) {
-    console.error("Error fetching weather data:", error); // Log any errors
-    return null; // Return null in case of an error
-  };
+    console.error("Failed to fetch weather data:", error);
+    // alert("Unable to fetch weather data. Please try again later.");
+    displayError();
+    return null;
+  }
+}
+function displayError() {
+  weatherContainer.innerHTML = `
+    <h2>Error</h2>
+    <p>Problem Encountered. Please check spelling or console log.</p>`;
+}
+function displayWeather(weatherData) {
+  weatherContainer.innerHTML = `
+  <h2>Weather Result</h2>
+  <h3>${weatherData.location.name}, ${weatherData.location.country}</h3>
+  <p>Temperature: ${weatherData.current.temp_c}°C</p>`; 
 };
+
 keyword.addEventListener("input", (event) => {
-  keyword = event.target.value; // Update the keyword with the input value
-  console.log(keyword); // Log the updated keyword
+  keyword = event.target.value; 
+  console.log(keyword); 
 });
-
-
-// Add event listener to the search button
-
-
 
 searchButton.addEventListener("click", async () => {
-  weatherData = await fetchWeather(); // Wait for the Promise to resolve
-  console.log(weatherData); // Log the fetched weather data
-  function displayWeather(weatherData) {
-    const weatherContainer = document.querySelector("#weatherresult"); 
-    weatherContainer.innerHTML = "";
-    weatherContainer.innerHTML = `
-    <h2>Weather Result</h2>
-    <h3>${weatherData.location.name}, ${weatherData.location.country}</h3>
-    <p>Temperature: ${weatherData.current.temp_c}°C</p>`; 
-};
+  weatherData = await fetchWeather(); 
+  console.log(weatherData); 
   displayWeather(weatherData);
 });
-
