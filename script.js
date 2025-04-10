@@ -31,8 +31,9 @@ function displayError() {
 //   <p>Temperature: ${weatherData.current.temp_c}°C</p>`; 
 // };
 function displayWeatherCard(weatherData) {
-  weatherContainer.innerHTML = `
-    <div class="card">
+  const card = document.createElement("div"); // Create a new div element
+  card.classList.add("card");
+  card.innerHTML = `
       <h2>${weatherData.location.name}</h2>
         <div id=cdnImg>
           <img src="${weatherData.current.condition.icon}" alt="${weatherData.current.condition.text}">
@@ -40,8 +41,12 @@ function displayWeatherCard(weatherData) {
         <p>Temperature: ${weatherData.current.temp_c}°C<br>
         <p>Feels Like: ${weatherData.current.feelslike_c}°C<br>
         <p>Condition: ${weatherData.current.condition.text}</p>
-      </div>`
+        `
+  weatherContainer.appendChild(card); // Append the card to the container
   }
+function clearSearch() {
+  keyword.value = "";
+}
    
 
 keyword.addEventListener("input", (event) => {
@@ -53,4 +58,5 @@ searchButton.addEventListener("click", async () => {
   weatherData = await fetchWeather(); 
   console.log(weatherData); 
   displayWeatherCard(weatherData);
+  clearSearch();
 });
