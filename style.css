@@ -1,9 +1,20 @@
+#main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+}
+#header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: auto;
 }
 .card {
   background-color: #f0f0f0;
@@ -26,4 +37,17 @@
   height: 110%;
   border-radius: 10px;
   padding-bottom: 20px;
+}
+.clear {
+  padding-top: 20px;
+}
+#map {
+  width: 80%;
+  margin-left: 10%;
+  height: 800px;
+  border-radius: 10px;
+  margin-top: 20px;
+  align-self: center;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

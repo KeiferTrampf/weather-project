@@ -1,12 +1,20 @@
+const main = document.querySelector("main");
 const searchButton = document.querySelector("#search");  
-const weatherContainer = document.querySelector(".container"); 
+const weatherContainer = document.querySelector(".container");
+const clearButton = document.querySelector("#clear");
+const weatherCard = document.querySelector(".card"); 
 let keyword = document.querySelector("#city"); 
 let weatherData = [];
+var map = L.map("map").setView([49.25, -123.33], 13);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
 
-async function fetchWeather() {
+async function fetchWeather(city) {
   try {
     const response = await fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=505b3cf5f180493ba7102053252103&q=${keyword}&days=1&aqi=no&alerts=no`
+      `https://api.weatherapi.com/v1/forecast.json?key=505b3cf5f180493ba7102053252103&q=${city}&days=1&aqi=no&alerts=no`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -44,19 +52,36 @@ function displayWeatherCard(weatherData) {
         `
   weatherContainer.appendChild(card); // Append the card to the container
   }
-function clearSearch() {
-  keyword.value = "";
+function setMap(weatherData) {
+  map.setView([weatherData.location.lat, weatherData.location.lon], 13); // Set the map view to the location's coordinates
+  L.marker([weatherData.location.lat, weatherData.location.lon]).addTo(map)
+    .bindPopup(weatherData.location.name)
+    .openPopup();
 }
-   
+function clearWeatherCard() {
+  weatherContainer.innerHTML = ""; // Clear the container
+}  
 
 keyword.addEventListener("input", (event) => {
   keyword = event.target.value; 
   console.log(keyword); 
 });
-
+clearButton.addEventListener("click", () => {
+  clearWeatherCard();
+});
 searchButton.addEventListener("click", async () => {
-  weatherData = await fetchWeather(); 
+  weatherData = await fetchWeather(keyword); // Fetch weather data for the input city
   console.log(weatherData); 
   displayWeatherCard(weatherData);
-  clearSearch();
+  setMap(weatherData);
 });
+document.body.addEventListener('click', async function(event) {
+  if (event.target.classList.contains('card')) {
+    const cityName = event.target.querySelector('h2').textContent; // Get the city name from the clicked card
+    console.log(cityName); // Log the city name to the console
+    keyword.value = cityName; // Set the input field to the clicked city name
+    const weatherData = await fetchWeather(cityName); // Fetch weather data for the clicked city
+    setMap(weatherData); // Set the map to the clicked city's location
+  }
+});
+
