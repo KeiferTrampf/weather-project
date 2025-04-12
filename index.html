@@ -10,24 +10,25 @@
     crossorigin=""/>
 </head>
 <body>
-    <div class = "main">
     <div id="header">
-    <h1>Weather Project</h1>
-    <p>This is a simple weather project.</p>
-    <div class="search-container">
-        <input type="text" id="city" placeholder="Enter city name">
-        <button id="search">Search</button>
-    </div>
-    <div class = clear>
-        <button id="clear">Clear All</button>
-    </div>
+        <h1>Weather Project</h1>
+        <p>This is a simple weather project.</p>
+        <div class="search-container">
+            <input type="text" id="city" placeholder="Enter city name">
+            <button id="search">Search</button>
+        </div>
+        <div class = clear>
+            <button id="clear">Clear All</button>
+        </div>
     </div>
     <div class="container"></div>
+    <div class="info">
+    <div class="weather"></div>
     <div id="map" class="map"></div>
+</div>
+</body>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
     <script src="script.js"></script>
-    </div>
-</body>
 </html>

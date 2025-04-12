@@ -1,8 +1,16 @@
-#main {
+/* main {
+  display: flex;
+  flex-direction: row;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+} */
+.info {
   height: 100vh;
   display: flex;
   flex-direction: column; 
-  justify-content: center;
+  /* justify-content: center; */
 }
 #header {
   display: flex;
@@ -11,10 +19,14 @@
 }
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: top;
   height: auto;
+  float: left;
+  width: 320px;
+  margin: 10px;
+  height: 100vh;
 }
 .card {
   background-color: #f0f0f0;
@@ -24,9 +36,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 300px;
   height: 150px;
+
+}
+.card:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 .card img {
-    width: auto;
+  width: auto;
   height: auto;
   border-radius: 10px;
   float: right;
@@ -42,12 +59,12 @@
   padding-top: 20px;
 }
 #map {
-  width: 80%;
-  margin-left: 10%;
+  margin-left: 10px;
+  margin-right: 10px;
   height: 800px;
   border-radius: 10px;
   margin-top: 20px;
-  align-self: center;
+  align-self: top;
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

@@ -3,6 +3,7 @@ const searchButton = document.querySelector("#search");
 const weatherContainer = document.querySelector(".container");
 const clearButton = document.querySelector("#clear");
 const weatherCard = document.querySelector(".card"); 
+const weatherInfo = document.querySelector(".weather");
 let keyword = document.querySelector("#city"); 
 let weatherData = [];
 var map = L.map("map").setView([49.25, -123.33], 13);
@@ -52,6 +53,17 @@ function displayWeatherCard(weatherData) {
         `
   weatherContainer.appendChild(card); // Append the card to the container
   }
+function displayWeather(weatherData) {
+  weatherInfo.innerHTML = `
+    <h2>${weatherData.location.name}, ${weatherData.location.country}</h2>
+    <h3>Temperature: ${weatherData.current.temp_c}°C</h3>
+    <p>Feels Like: ${weatherData.current.feelslike_c}°C</p>
+    <p>Condition: ${weatherData.current.condition.text}</p>
+    <p>Humidity: ${weatherData.current.humidity}%</p>
+    <p>Wind Speed: ${weatherData.current.wind_kph} kph</p>
+    <p>Last Updated: ${weatherData.current.last_updated}</p>`;
+
+}
 function setMap(weatherData) {
   map.setView([weatherData.location.lat, weatherData.location.lon], 13); // Set the map view to the location's coordinates
   L.marker([weatherData.location.lat, weatherData.location.lon]).addTo(map)
@@ -74,6 +86,7 @@ searchButton.addEventListener("click", async () => {
   console.log(weatherData); 
   displayWeatherCard(weatherData);
   setMap(weatherData);
+  displayWeather(weatherData); // Display the weather data
 });
 document.body.addEventListener('click', async function(event) {
   if (event.target.classList.contains('card')) {
@@ -82,6 +95,7 @@ document.body.addEventListener('click', async function(event) {
     keyword.value = cityName; // Set the input field to the clicked city name
     const weatherData = await fetchWeather(cityName); // Fetch weather data for the clicked city
     setMap(weatherData); // Set the map to the clicked city's location
+    displayWeather(weatherData); // Display the weather data
   }
 });
 
