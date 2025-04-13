@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Project</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+  </head>
+  <body>
     <div id="header">
-        <h1>Weather Project</h1>
-        <p>This is a simple weather project.</p>
-        <div class="search-container">
-            <input type="text" id="city" placeholder="Enter city name">
-            <button id="search">Search</button>
-        </div>
-        <div class = clear>
-            <button id="clear">Clear All</button>
-        </div>
+      <h1>Weather Project</h1>
+      <p>Enter the name of a City or double click on the map to get started!</p>
+      <div class="search-container">
+        <input type="text" id="city" placeholder="Enter city name" />
+        <button id="search">Search</button>
+      </div>
+      <div class="clear">
+        <button id="clear">Clear Entries</button>
+      </div>
     </div>
     <main>
-    <div class="container"></div>
-    <div class="info">
-    <div class="weather"></div>
-    <div id="map" class="map"></div>
-</div>
+      <div class="container"></div>
+      <div class="info">
+        <div class="weather"></div>
+        <div id="map" class="map"></div>
+      </div>
     </main>
     <div class="footer">
-        <p>Weather data provided by OpenWeatherMap</p>
+      <p>Weather data provided by OpenWeatherMap</p>
     </div>
-
-</body>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  </body>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
-    <script src="script.js"></script>
+    crossorigin=""
+  ></script>
+  <script src="script.js"></script>
 </html>
