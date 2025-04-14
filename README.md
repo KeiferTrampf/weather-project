@@ -1,7 +1,9 @@
 ## Weather Project
-The purpose of this small web app is to be able to search for a city, as well as click on the map to find out the weather of an area, and then recall previous seraches. 
+
+The purpose of this small web app is to be able to search for a city, as well as click on the map to find out the weather of an area, and then recall previous seraches.
 
 ## Use
+
 The Map should load right away allowing the user to drag around and double click on an area which will add a marker to the closest point that the weather api can find.
 
 ![Screenshot (40)](https://github.com/user-attachments/assets/56bd9b88-dddc-466f-921a-d8c8ca1110b1)
@@ -16,3 +18,6 @@ Suggesting its veiwed on mobile platforms, the screen resize should still allow 
 
 ![Screenshot (43)](https://github.com/user-attachments/assets/7f8ebb3c-9d6d-4958-b5b6-71a56a7200e7)
 
+## Summary
+
+I found working on this project to be quite a bit of fun, with the java script seeming to work without a whole lot of hitches. the harder part was definetly getting the CSS to play nice with DOM manipulation, but over all im quite happy with how it turned out.
