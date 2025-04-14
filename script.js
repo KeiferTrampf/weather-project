@@ -31,16 +31,10 @@ async function fetchWeather(city) {
   }
 }
 function displayError() {
-  weatherContainer.innerHTML = `
-    <h2>Error</h2>
-    <p>Problem Encountered. Please check spelling or console log.</p>`;
+  alert(
+    "Problem Encountered. Please check spelling or console log for details."
+  ); // error message handler
 }
-// function displayWeather(weatherData) {
-//   weatherContainer.innerHTML = `
-//   <h2>Weather Result</h2>
-//   <h3>${weatherData.location.name}, ${weatherData.location.country}</h3>
-//   <p>Temperature: ${weatherData.current.temp_c}°C</p>`;
-// };
 function displayWeatherCard(weatherData) {
   const card = document.createElement("div"); // Create a new div element
   card.classList.add("card");
@@ -77,14 +71,15 @@ function clearWeatherCard() {
   weatherInfo.innerHTML = ""; // Clear the weather info
 }
 async function onMapClick(e) {
-  const lat = e.latlng.lat; // Get the latitude from the click event
-  const lon = e.latlng.lng; // Get the longitude from the click event
-  console.log(`Latitude: ${lat}, Longitude: ${lon}`); // Log the coordinates to the console
+  // Function to handle map click events
+  const lat = e.latlng.lat;
+  const lon = e.latlng.lng;
+  console.log(`Latitude: ${lat}, Longitude: ${lon}`);
   fetchWeather(`${lat},${lon}`);
   const weatherData = await fetchWeather(`${lat},${lon}`);
-  displayWeatherCard(weatherData); // Display the weather data for the clicked location
-  setMap(weatherData); // Set the map to the clicked location
-  displayWeather(weatherData); // Display the weather data
+  displayWeatherCard(weatherData);
+  setMap(weatherData);
+  displayWeather(weatherData);
 }
 keyword.addEventListener("input", (event) => {
   keyword = event.target.value;
@@ -103,7 +98,7 @@ searchButton.addEventListener("click", async () => {
 document.body.addEventListener("click", async function (event) {
   if (event.target.classList.contains("card")) {
     const cityName = event.target.querySelector("h2").textContent; // Get the city name from the clicked card
-    console.log(cityName); // Log the city name to the console
+    console.log(cityName);
     keyword.value = cityName; // Set the input field to the clicked city name
     const weatherData = await fetchWeather(cityName); // Fetch weather data for the clicked city
     setMap(weatherData); // Set the map to the clicked city's location
